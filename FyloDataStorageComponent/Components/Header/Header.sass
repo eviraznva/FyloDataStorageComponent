@@ -1,0 +1,39 @@
+@use 'sass:list'
+@use '../Variables/_Colors' as Colors
+@use '../Variables/_Mixins' as M
+
+$border-radius: 1rem, 8rem, 1rem, 1rem
+
+header
+    background-color: Colors.$dark-blue
+    padding: 2.5rem 7.6rem 2.5rem 2.6rem
+    border-top-left-radius: list.nth($border-radius, 1)
+    border-top-right-radius: list.nth($border-radius, 2)
+    border-bottom-left-radius: list.nth($border-radius, 3)
+    border-bottom-right-radius: list.nth($border-radius, 4)
+    img[alt="Fylo logo"]
+        margin-bottom: 1.5rem
+    .header-icons-container
+        @include M.FlexRow($position: relative)
+        justify-content: flex-start
+        div
+            position: relative
+            display: grid
+            justify-items: center
+            align-content: center
+            background-color: Colors.$very-dark-blue
+            @include M.Size($w: 2rem, $h: 2rem)
+            margin: 0.65rem
+            border-radius: 0.7rem
+            padding: 0.85rem
+            img
+                scale: 1.1
+            &:nth-child(1)
+                margin-left: 0
+            &:nth-child(3)
+                margin-right: 0
+
+@media screen and (min-width: 985px)
+     header
+        margin-right: 2rem
+        width: 15%

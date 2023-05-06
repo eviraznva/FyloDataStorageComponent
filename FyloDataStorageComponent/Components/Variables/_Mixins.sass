@@ -1,0 +1,22 @@
+@mixin BgImage($image-url)
+    background-image: url($image-url)
+    background-repeat: no-repeat
+    background-position: bottom
+    @content
+
+@mixin Size($w, $h)
+    width: $w
+    height: $h
+    @content
+
+@mixin FlexRow($position)
+    position: $position
+    display: flex
+    flex-direction: row
+    @content
+
+@mixin FlexCol($position)
+    position: $position
+    display: flex
+    flex-direction: column
+    @content

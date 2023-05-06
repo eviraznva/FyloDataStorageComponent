@@ -1,0 +1,96 @@
+@use 'sass:math'
+@use '../Variables/_Colors' as Colors
+@use '../Variables/_Mixins' as M
+
+:root
+    --value-progres: 60
+
+section
+    @include M.FlexCol($position: relative)
+    align-items: center
+    background-color: Colors.$dark-blue
+    margin-top: 1.45rem
+    border-radius: 1rem
+    padding: 1.75rem 1.75rem 5.8rem 1.75rem
+    .content-progres
+        @include M.FlexRow($position: relative)
+        align-items: center
+        @include M.Size($w: 100%, $h: 1.6rem)
+        background-color: rgba(Colors.$very-dark-blue, 0.55)
+        margin-top: 1.4rem
+        border-radius: 2rem
+        &::before
+            content: '0 GB'
+            position: absolute
+            color: Colors.$pale-blue
+            bottom: -1.85rem
+            left: 0.05rem
+            font-weight: 700
+        &::after
+            content: '1000 GB'
+            position: absolute
+            color: Colors.$pale-blue
+            bottom: -1.85rem
+            right: 0.05rem
+            font-weight: 700
+        span
+            @include M.FlexRow($position: relative)
+            justify-content: flex-end
+            align-items: center
+            @include M.Size($w: calc(var(--value-progres) * 1%), $h: 1.1rem)
+            min-width: 1.1rem    
+            margin: 0 0.3rem 0 0.3rem
+            background: linear-gradient(90deg, Colors.$gradient-from 12%, Colors.$gradient-to 87%)
+            border-radius: 2rem
+            transition: width 350ms linear
+            &::before
+                content: ''
+                position: absolute
+                @include M.Size($w: 0.75rem, $h: 0.75rem)  
+                right: 0.17rem
+                background-color: white
+                border-radius: 50%
+    .content-left-gb
+        @include M.FlexRow($position: absolute)
+        bottom: -2.9rem
+        align-items: center
+        color: Colors.$grayish-blue
+        background-color: white
+        font-weight: 700
+        padding: 1rem 2rem 1rem 2rem
+        font-size: 1rem
+        border-radius: 1rem
+        span
+            color: black
+            font-weight: 700
+            font-size: 3rem
+            margin-right: 1rem
+    p
+        color: Colors.$pale-blue
+        font-weight: 400
+        font-size: 1rem
+
+@media screen and (min-width: 985px)
+    section 
+        position: relative
+        width: 33%
+        padding: 1.75rem 3rem 5.8rem 3rem
+        .content-left-gb
+            bottom: 11rem
+            right: 3rem
+            &::after
+                content: ' '
+                position: absolute
+                right: 0
+                bottom: -2rem
+                border: 2rem solid white
+                border-top-color: transparent
+                border-bottom-color: transparent
+                border-left-color: transparent
+        p
+            align-self: flex-start
+
+    
+@for $n from 20 through 1000
+    .content-progres[aria-value="#{math.div($n, 10)}"] span
+        --value-progres: #{math.div($n, 10)}       
